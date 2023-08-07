@@ -7,8 +7,9 @@
         size="default"
         status-icon
     >
-        <h1>新增人员</h1>
-        <el-form-item label="题目" required prop="title" :rules="[{ required: true, message: '需要填写文章标题', trigger: 'blur', }]">
+        <h1>修改文章</h1>
+        <el-form-item label="题目" required prop="title"
+                      :rules="[{ required: true, message: '需要填写文章标题', trigger: 'blur', }]">
             <el-input v-model="article_data_form.title"/>
         </el-form-item>
         <el-form-item label="发布时间" required prop="release_date"
@@ -16,7 +17,8 @@
                       :rules="[{ required: true, message: '需要填写发布时间', trigger: 'blur', }]">
             <el-date-picker type="datetime" v-model="article_data_form.release_date"/>
         </el-form-item>
-        <el-form-item label="分类" required prop="type" :rules="[{ required: true, message: '需要填写分类', trigger: 'blur', }]">
+        <el-form-item label="分类" required prop="type"
+                      :rules="[{ required: true, message: '需要填写分类', trigger: 'blur', }]">
             <el-cascader
                 v-model="article_data_form.type"
                 :options="category_data"
@@ -25,7 +27,8 @@
                 clearable
             />
         </el-form-item>
-        <el-form-item label="内容" required prop="content" :rules="[{ required: true, message: '需要填写内容', trigger: 'blur', }]">
+        <el-form-item label="内容" required prop="content"
+                      :rules="[{ required: true, message: '需要填写内容', trigger: 'blur', }]">
             <MyTinymce
                 v-model="article_data_form.content"
                 style="width: 100%"
@@ -45,9 +48,9 @@
 <script setup>
 import MyTinymce from "../MyTinymce.vue"
 import {onMounted, ref} from "vue";
-import {convertToChildrenFormat,getParents} from "../../units/my_category_handle.js";
+import {convertToChildrenFormat, getParents} from "../../units/my_category_handle.js";
 import {MyRequestMixin} from "../../units/my_requests.js";
-import { article_url, category_summary_url} from "../../units/my_global_url.js";
+import {article_root_url, category_summary_url} from "../../units/my_global_url.js";
 import {form_validate} from "../../units/my_form_validate.js";
 import {MyTipsMixin} from "../../units/my_tips.js";
 
@@ -57,31 +60,34 @@ onMounted(async () => {
 })
 let category_data = ref([])
 let raw_category_data = []
+
 async function get_category_data() {
     raw_category_data = (await MyRequestMixin.get_data(category_summary_url)).data
     category_data.value = convertToChildrenFormat(raw_category_data)
     console.log("分类数据", category_data)
 }
+
 async function get_article_data() {
-    article_data_form.value = (await MyRequestMixin.get_data(article_url+props.id)).data
-    article_data_form.value.type =  getParents(raw_category_data,article_data_form.value.type)
+    article_data_form.value = (await MyRequestMixin.get_data(article_root_url + props.id)).data
+    article_data_form.value.type = getParents(raw_category_data, article_data_form.value.type)
     console.log("文章数据", article_data_form.value)
 }
+
 async function put_article_data() {
-    const result = (await MyRequestMixin.put_data(article_url+props.id,article_data_form.value)).data
+    const result = (await MyRequestMixin.put_data(article_root_url + props.id, article_data_form.value)).data
     if (result.error) {
         MyTipsMixin.error_tip(result.error)
     } else {
         MyTipsMixin.success_tip("提交成功")
     }
 }
-function submit(){
-    form_validate(article_form.value,put_article_data())
+
+function submit() {
+    form_validate(article_form.value, put_article_data())
 }
 
 
-
-const props = defineProps(['id',"is_editing"])
+const props = defineProps(['id', "is_editing"])
 const article_form = ref();
 const article_data_form = ref({
     title: "",

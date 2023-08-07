@@ -1,19 +1,32 @@
 import './style.css'
 import App from './App.vue'
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import ElementPlus from 'element-plus'
 import "element-plus/dist/index.css"
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
-import { createRouter, createWebHistory } from "vue-router"
+import {createRouter, createWebHistory} from "vue-router"
+import Cookies from "js-cookie";
+import {generateSecret} from "./units/my_check.js"
+
+
 const routes = [
-    {
-        path: '/',
-        name: "home",
-        component: () => import("./components/Home.vue"),
-        //路由守卫,防止未登录进入系统
-    },
+    {path: '/', name: "home", component: () => import("./components/Home.vue")},
     {path: '/login', name: "login", component: () => import("./components/Login.vue")},
-    {path: '/manage', name: "manage", component: () => import("./components/Manage.vue")},
+    {
+        path: '/manage', name: "manage", component: () => import("./components/Manage.vue"),
+        beforeEnter: (to, from) => {
+            if (!Cookies.get("token") ||
+                !Cookies.get("check_code") ||
+                generateSecret(Cookies.get("token")) !== Cookies.get("check_code")) {
+                document.location.href = "/login"
+                Cookies.remove("token")
+                Cookies.remove("id")
+                Cookies.remove("username")
+                Cookies.remove("check_code")
+            }
+
+        }
+    },
     {path: '/:pathMatch(.*)*', name: "error", component: () => import("./components/404.vue")},
 
 ];

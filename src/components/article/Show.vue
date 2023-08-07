@@ -4,7 +4,7 @@
             <el-table ref="table_ref" stripe border size="large" :data="article_summary_data"
                       @sort-change="">
                 <el-table-column prop="title" fixed='left' label="标题" resizable min-width="100px"/>
-                <el-table-column prop="author" label="作者" resizable min-width="100px"/>
+                <el-table-column prop="type_name" label="类型" resizable min-width="100px"/>
                 <el-table-column prop="release_date" label="发布日期" resizable min-width="100px"
                                  :formatter="formatReleaseDateTime"/>
                 <el-table-column prop="modification_date" label="修改时间" resizable
@@ -20,7 +20,7 @@
                             <el-button type="primary" :icon="Edit"
                                        @click="is_editing=false;id=scope.row.id">编辑
                             </el-button>
-                            <el-button type="danger" :icon="Delete" @click="delete_article_url(scope.row.id)">
+                            <el-button type="danger" :icon="Delete" @click="MyTipsMixin.confirm_delete(scope.row.id,delete_article_url)">
                                 删除
                             </el-button>
                         </el-button-group>
@@ -49,9 +49,8 @@
 import {onMounted, ref} from "vue";
 import {Delete, Edit} from '@element-plus/icons-vue'
 import {ElButton, ElTable} from "element-plus";
-import Cookies from "js-cookie"
 import {MyRequestMixin} from "../../units/my_requests.js";
-import {article_summary_url, article_url} from "../../units/my_global_url.js";
+import {article_summary_root_url, article_root_url} from "../../units/my_global_url.js";
 import {MyTipsMixin} from "../../units/my_tips.js";
 import Change from "./Change.vue"
 
@@ -71,14 +70,14 @@ const current_page = ref(1)
 
 
 async function get_article_summary_data() {
-    const data = (await MyRequestMixin.get_data(article_summary_url+"?page="+current_page.value)).data
+    const data = (await MyRequestMixin.get_data(article_summary_root_url+"?page="+current_page.value)).data
     article_summary_data.value = data.results
     article_count.value = data.count
     console.log("文章数据", article_summary_data.value, article_count.value)
 }
 
 async function delete_article_url(id) {
-    const result = await MyRequestMixin.delete_data(article_url + id)
+    const result = await MyRequestMixin.delete_data(article_root_url + id)
     console.log("结果", result)
     if (result.error) {
         MyTipsMixin.error_tip(result.error)

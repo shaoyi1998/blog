@@ -37,14 +37,14 @@ const init_config = ref({
     relative_urls: true,
     document_base_url: front_url,
     plugins: 'quickbars image wordcount codesample fullscreen charmap insertdatetime preview table lists advlist',
-    toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | indent outdent image bullist numlist table backcolor insertdatetime codesample charmap  preview  wordcount fullscreen',
+    toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | indent outdent image ' +
+        'bullist numlist table backcolor insertdatetime codesample charmap  preview  wordcount fullscreen',
     images_file_types: 'jpg,svg,webp,png,jpeg',
     skin_url: "tinymce/skins/ui/oxide/",
     content_css: 'tinymce/skins/content/default/content.css',
     promotion: false,
     branding: false,
     paste_data_images: true,
-    // images_upload_url: ''
 })
 </script>
 

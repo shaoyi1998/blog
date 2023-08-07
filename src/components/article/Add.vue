@@ -7,7 +7,7 @@
         size="default"
         status-icon
     >
-        <h1>新增人员</h1>
+        <h1>新增文章</h1>
         <el-form-item label="题目" required prop="title" :rules="[{ required: true, message: '需要填写文章标题', trigger: 'blur', }]">
             <el-input v-model="article_data_form.title"/>
         </el-form-item>
@@ -45,7 +45,7 @@ import Cookies from "js-cookie";
 import MyTinymce from "../MyTinymce.vue"
 import {convertToChildrenFormat} from "../../units/my_category_handle.js";
 import {MyRequestMixin} from "../../units/my_requests.js";
-import {article_url, category_summary_url,} from "../../units/my_global_url.js";
+import {article_root_url, category_summary_url,} from "../../units/my_global_url.js";
 import {form_validate} from "../../units/my_form_validate.js";
 import {MyTipsMixin} from "../../units/my_tips.js";
 onMounted(
@@ -74,7 +74,7 @@ function submit(){
 }
 
 async function post_article_data() {
-    const result = await MyRequestMixin.post_data(article_url, article_data_form, Cookies.get("token"))
+    const result = await MyRequestMixin.post_data(article_root_url, article_data_form, Cookies.get("token"))
     console.log(result)
     if (result.error) {
         MyTipsMixin.error_tip(result.error)

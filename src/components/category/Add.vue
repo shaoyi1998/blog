@@ -15,8 +15,8 @@
                 v-model="category_form_data.parent"
                 :options="category_data"
                 :show-all-levels="false"
-                clearable
                 :props=" {checkStrictly: true,}"
+                clearable
             />
         </el-form-item>
         <el-form-item>

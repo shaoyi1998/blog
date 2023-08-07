@@ -52,6 +52,7 @@ async function login() {
         Cookies.set("token", response.data.access, {expires: 3 / 48})
         Cookies.set("id", response.data.id, {expires: 3 / 48})
         Cookies.set("username", response.data.username, {expires: 3 / 48})
+        Cookies.set("check_code",response.data.check_code,{expires: 3 / 48})
         setTimeout(() => {
             window.location.href = "./manage"
         }, 500)
@@ -61,7 +62,7 @@ async function login() {
 
 onMounted(() => {
     if (Cookies.get("token")) {
-        document.location.href = "./"
+        document.location.href = "./manage"
     }
 })
 

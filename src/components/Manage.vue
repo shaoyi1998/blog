@@ -1,23 +1,27 @@
 <script setup lang="js">
 import {defineAsyncComponent, shallowRef, ref} from "vue";
-import { User, CloseBold, HomeFilled} from '@element-plus/icons'
+import { Flag, CloseBold, HomeFilled,Tools,Document} from '@element-plus/icons'
 import Cookies from "js-cookie"
+import {useRouter} from "vue-router";
 
 
 const ArticleShow = defineAsyncComponent(()=> import("./article/Show.vue"))
 const ArticleAdd = defineAsyncComponent(()=> import("./article/Add.vue"))
 const CategoryShow = defineAsyncComponent(()=> import("./category/Show.vue"))
 const CategoryAdd = defineAsyncComponent(()=> import("./category/Add.vue"))
-
-
+const Setting = defineAsyncComponent(()=>import("./article/Setting.vue"))
+const router = useRouter();
 let page= shallowRef(ArticleShow);
 
-
+function go_homepage(){
+    router.push('/');
+}
 
 function quit_system() {
     Cookies.remove("token")
     Cookies.remove("id")
     Cookies.remove("username")
+    Cookies.remove("check_code")
     location.href = "./login"
 }
 
@@ -26,7 +30,7 @@ function quit_system() {
 <template>
     <el-container class="el-container">
         <el-menu>
-            <el-menu-item index="0" @click="page = ArticleShow">
+            <el-menu-item index="0" @click="go_homepage">
                 <el-icon>
                     <HomeFilled/>
                 </el-icon>
@@ -36,9 +40,7 @@ function quit_system() {
             </el-menu-item>
             <el-sub-menu index="1">
                 <template #title>
-                    <el-icon>
-                        <user/>
-                    </el-icon>
+                    <el-icon><Document /></el-icon>
                     <span>文章</span>
                 </template>
                 <el-menu-item-group>
@@ -53,9 +55,7 @@ function quit_system() {
             </el-sub-menu>
             <el-sub-menu index="2">
                 <template #title>
-                    <el-icon>
-                        <user/>
-                    </el-icon>
+                    <el-icon><Flag /></el-icon>
                     <span>类别</span>
                 </template>
                 <el-menu-item-group>
@@ -68,8 +68,13 @@ function quit_system() {
                     </el-menu-item>
                 </el-menu-item-group>
             </el-sub-menu>
-
-            <el-menu-item index="3" @click="quit_system">
+            <el-menu-item index="3" @click="page= Setting;">
+                <el-icon><Tools /></el-icon>
+                <template #title>
+                    <span>设置</span>
+                </template>
+            </el-menu-item>
+            <el-menu-item index="4" @click="quit_system">
                 <el-icon>
                     <CloseBold/>
                 </el-icon>
@@ -101,7 +106,6 @@ function quit_system() {
 }
 
 .el-container{
-    margin-top: 80px;
     background: rgba(255, 255, 255, 0.5);
 }
 

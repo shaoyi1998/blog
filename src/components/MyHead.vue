@@ -28,10 +28,12 @@ const props = defineProps(
 <style scoped>
 .title_background {
     margin-top: 2px;
-    padding:10px 20px 0; /* 添加一些内边距，以便内容不会太靠近边缘 */
+    padding:10px 20px 0px 30px; /* 添加一些内边距，以便内容不会太靠近边缘 */
     border-radius: 10px; /* 设置圆角大小 */
     background-attachment: scroll;
     background-size: cover;
+    z-index: 1;
+    font-size: 25px;
 }
 
 .title_background h2:hover {

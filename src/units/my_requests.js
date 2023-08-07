@@ -23,9 +23,11 @@ class MyRequestMixin {
         }
     }
 
-    static async post_data(url, data, jwt_config_head = Cookies.get("token")) {
+    static async post_data(url, data, jwt_config_head = Cookies.get("token"), csrftoken = Cookies.get('csrftoken')) {
         try {
-            return await axios.post(url, data, {headers: {"Authorization": "Bearer " + jwt_config_head}})
+            return await axios.post(url, data, {
+                headers: {"Authorization": "Bearer " + jwt_config_head, "x-csrftoken": csrftoken,},
+            })
         } catch (error) {
             return this.error_handle(error)
         }
@@ -56,6 +58,7 @@ class MyRequestMixin {
                 Cookies.remove("token")
                 Cookies.remove("id")
                 Cookies.remove("username")
+                Cookies.remove("check_code")
                 setTimeout(() => {
                     window.location.href = "./login"
                 }, 500)

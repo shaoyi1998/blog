@@ -5,10 +5,10 @@ import HelloWorld from './components/HelloWorld.vue'
 import MyHead from "./components/MyHead.vue"
 import MyFoot from "./components/MyFoot.vue"
 
-const icp_text = "湘ICP备18015634号-2"
+const icp_text = "湘ICP备18015634号-1"
 const icp_url = "https://beian.miit.gov.cn/#/Integrated/index"
-const psr_text = "湘公网安备 43130202000220号"
-const psr_url = "https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43130202000220"
+const psr_text = "湘公网安备 43130202000167号"
+const psr_url = "https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43130202000167"
 //页头图片
 const head_img = "title.jpg"
 //页尾渐变色
@@ -19,7 +19,7 @@ const foot_color = "rgb(25,234,234)"
 <template>
     <div class="resume" :style="{ 'background-image': 'url(title.jpg)' }">
         <el-container class="container">
-            <el-header>
+            <el-header style="height: fit-content;">
                 <MyHead :head_img="head_img" style="color:#ffffff"/>
             </el-header>
             <el-main>
@@ -31,12 +31,13 @@ const foot_color = "rgb(25,234,234)"
             </el-footer>
         </el-container>
     </div>
+    <iframe  border="0"  width=330 height=210  class="music-163" src="//music.163.com/outchain/player?type=0&id=8628369829&auto=1&height=430"></iframe>
 </template>
 
 <style scoped>
 .resume {
     margin: 0 auto;
-    padding: 20px;
+    padding: 1rem;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -50,6 +51,14 @@ const foot_color = "rgb(25,234,234)"
 .container {
     transform-style: preserve-3d;
     animation: book-open 1s ease-in-out forwards;
+    margin: 0.5rem auto;
 }
 
+.music-163 {
+    position: fixed ;
+    bottom: 0.15rem;
+    right: 1rem;
+    z-index: 500 ;
+    border: none;
+}
 </style>
