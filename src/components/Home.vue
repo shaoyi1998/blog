@@ -142,7 +142,6 @@ async function get_article_summary_data() {
 
 async function get_category_data() {
     category_data.value = convertToChildrenFormat((await MyRequestMixin.get_data(category_summary_url)).data)
-    console.log("分类数据", category_data.value)
 }
 
 async function menu_select(key, keyPath) {
@@ -159,7 +158,6 @@ async function menu_select(key, keyPath) {
 async function open_article(id) {
     is_open.value = false
     article_data.value = (await MyRequestMixin.get_data(article_url + id)).data
-    console.log("文章数据", article_data.value)
     extractCode(article_data)
 }
 
@@ -247,7 +245,7 @@ function extractCode(data) {
 }
 
 .card-header {
-    background-color: #a3f5b9;
+    background-color: #77e5f8;
     padding: 1rem;
     border-radius: 1rem 1rem 0 0;
     font-size: 1.5rem;
@@ -261,7 +259,7 @@ function extractCode(data) {
 
 .card_summary {
     padding: 15px;
-    background-color: #88e4e7;
+    background-color: #19dae1;
     border-radius: 0 0 1rem 1rem;
 }
 

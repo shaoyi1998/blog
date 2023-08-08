@@ -73,12 +73,10 @@ async function get_article_summary_data() {
     const data = (await MyRequestMixin.get_data(article_summary_root_url+"?page="+current_page.value)).data
     article_summary_data.value = data.results
     article_count.value = data.count
-    console.log("文章数据", article_summary_data.value, article_count.value)
 }
 
 async function delete_article_url(id) {
     const result = await MyRequestMixin.delete_data(article_root_url + id)
-    console.log("结果", result)
     if (result.error) {
         MyTipsMixin.error_tip(result.error)
     } else {

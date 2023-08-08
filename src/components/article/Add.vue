@@ -57,7 +57,6 @@ let category_data = ref([])
 
 async function get_category_data() {
     category_data.value = convertToChildrenFormat((await MyRequestMixin.get_data(category_summary_url)).data)
-    console.log("分类数据", category_data)
 }
 
 const article_form = ref();
@@ -75,7 +74,6 @@ function submit(){
 
 async function post_article_data() {
     const result = await MyRequestMixin.post_data(article_root_url, article_data_form, Cookies.get("token"))
-    console.log(result)
     if (result.error) {
         MyTipsMixin.error_tip(result.error)
     } else {

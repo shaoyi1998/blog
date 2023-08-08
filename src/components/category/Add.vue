@@ -58,7 +58,6 @@ function submit(){
 
 async function get_category_data() {
     category_data.value = convertToChildrenFormat((await MyRequestMixin.get_data(category_summary_url)).data)
-    console.log("分类数据", category_data)
 }
 
 async function post_category_data() {

@@ -64,13 +64,11 @@ let raw_category_data = []
 async function get_category_data() {
     raw_category_data = (await MyRequestMixin.get_data(category_summary_url)).data
     category_data.value = convertToChildrenFormat(raw_category_data)
-    console.log("分类数据", category_data)
 }
 
 async function get_article_data() {
     article_data_form.value = (await MyRequestMixin.get_data(article_root_url + props.id)).data
     article_data_form.value.type = getParents(raw_category_data, article_data_form.value.type)
-    console.log("文章数据", article_data_form.value)
 }
 
 async function put_article_data() {

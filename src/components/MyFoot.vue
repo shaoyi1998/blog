@@ -2,7 +2,7 @@
     <div class="foot" :style="{ 'background': 'linear-gradient(45deg, #e4efe9,' + (foot_color || '#40e7bc') + ')' }">
         <el-row>
             <el-col :xs="0" :sm="0" :md="24" :lg="24" :xl="24">
-                <h5>日月为易 执一而始 莫一而终 Copyright (C) 20018-{{now_year}} All Rights Reserved.</h5>
+                <h5>日月为易 执一而始 莫一而终 Copyright (C) 2018-{{now_year}} All Rights Reserved.</h5>
                 <h5><el-image  src="beian.png" alt="图标"/>
                     &nbsp;<a :href="icp_url||''">{{icp_text||"icp备案"}}</a>
                     &nbsp;<a :href="psr_url||''">{{psr_text||"公安备案号"}}</a>

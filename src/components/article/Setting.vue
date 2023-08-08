@@ -30,7 +30,6 @@ import {setting_image_url,change_image_save_method_url,change_image_compressibil
 onMounted(
     async () => {
         setting.value = (await MyRequestMixin.get_data(setting_image_url)).data
-        console.log("分类数据", setting.value)
     }
 )
 const setting = ref({
