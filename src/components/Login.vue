@@ -72,33 +72,54 @@ onMounted(() => {
 
 
 <style scoped>
+    
 * {
-    font-size: 10px
+    font-size: 10px;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(180deg, #f5f7fa, #c3cfe2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
 h1 {
     text-align: center;
     font-size: 30px;
+    color: #333;
+    margin-bottom: 20px;
 }
 
-
-
-.login-from {
+.login-form {
     width: 70em;
     padding: 5em;
     height: fit-content;
     background: linear-gradient(180deg, rgba(255, 241, 235, 0.25) 0%, rgba(172, 224, 249, 1) 100%);
-    box-sizing: border-box;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     border-radius: 5em;
     border: 1em solid #a0cfff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-
+.login-form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
 
 .title_text strong {
     padding: 0.2em;
     font-size: 3.5em;
-    left: 0;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .title_img img {
@@ -106,17 +127,38 @@ h1 {
     min-width: 6em;
     padding: 0.2em;
     border-radius: 20%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.title_img img:hover {
+    transform: scale(1.1);
 }
 
 .button {
-
     display: flex;
     justify-content: center;
     width: 100%;
+    margin-top: 20px;
 }
 
+.button button {
+    padding: 1em 2em;
+    font-size: 1.8em;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 3em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
 
-.el-container{
+.button button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.el-container {
     display: flex;
     align-items: center;
     justify-content: center;
